@@ -234,7 +234,7 @@ namespace SPICA.PICA.Converters
             return Output;
         }
 
-        public static System.Drawing.Bitmap DecodeBitmap(byte[] Input, int Width, int Height, PICATextureFormat Format)
+        public static Image DecodeBitmap(byte[] Input, int Width, int Height, PICATextureFormat Format)
         {
             byte[] Buffer = DecodeBuffer(Input, Width, Height, Format);
 
@@ -490,20 +490,8 @@ namespace SPICA.PICA.Converters
             return Length;
         }
 
-        public static System.Drawing.Bitmap GetBitmap(byte[] Buffer, int Width, int Height)
-        {
-            System.Drawing.Rectangle Rect = new System.Drawing.Rectangle(0, 0, Width, Height);
-
-            System.Drawing.Bitmap Img = new System.Drawing.Bitmap(Width, Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-
-            System.Drawing.Imaging.BitmapData ImgData = Img.LockBits(Rect, System.Drawing.Imaging.ImageLockMode.WriteOnly, Img.PixelFormat);
-
-            Marshal.Copy(Buffer, 0, ImgData.Scan0, Buffer.Length);
-
-            Img.UnlockBits(ImgData);
-
-            return Img;
-        }
+        public static Image GetBitmap(byte[] buffer, int width, int height) =>
+            Image.LoadPixelData<Rgba32>(buffer, width, height);
 
         // Convert helpers from Citra Emulator (citra/src/common/color.h)
         private static byte Convert8To1(byte val) { return (byte)(val == 0 ? 0 : 1); }

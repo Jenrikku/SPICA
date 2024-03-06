@@ -20,7 +20,8 @@ namespace SPICA.Formats.CtrGfx.LUT
 
         private byte[] RawCommands;
 
-        [Ignore] private float[] _Table;
+        [Ignore]
+        private float[] _Table;
 
         public float[] Table
         {
@@ -53,12 +54,12 @@ namespace SPICA.Formats.CtrGfx.LUT
             for (int i = 0; i < RawCommands.Length; i += 4)
             {
                 Commands[i >> 2] = (uint)(
-                    RawCommands[i + 0] <<  0 |
-                    RawCommands[i + 1] <<  8 |
-                    RawCommands[i + 2] << 16 |
-                    RawCommands[i + 3] << 24);
+                    RawCommands[i + 0] << 0
+                    | RawCommands[i + 1] << 8
+                    | RawCommands[i + 2] << 16
+                    | RawCommands[i + 3] << 24
+                );
             }
-            Console.WriteLine($"RawCommands {RawCommands.Length} Commands {Commands.Length}");
 
             uint Index = 0;
 
@@ -72,8 +73,9 @@ namespace SPICA.Formats.CtrGfx.LUT
                     Index = Cmd.Parameters[0] & 0xff;
                 }
                 else if (
-                    Cmd.Register >= PICARegister.GPUREG_LIGHTING_LUT_DATA0 &&
-                    Cmd.Register <= PICARegister.GPUREG_LIGHTING_LUT_DATA7)
+                    Cmd.Register >= PICARegister.GPUREG_LIGHTING_LUT_DATA0
+                    && Cmd.Register <= PICARegister.GPUREG_LIGHTING_LUT_DATA7
+                )
                 {
                     foreach (uint Param in Cmd.Parameters)
                     {

@@ -243,6 +243,7 @@ namespace SPICA.Formats.CtrGfx.Model
                 GfxMaterial Mat = Model.Materials[Mesh.MaterialIndex];
 
                 M.UpdateBoolUniforms(Mdl.Materials[Mesh.MaterialIndex]);
+                M.IsVisible = Mesh.IsVisible;
 
                 Mdl.AddMesh(M);
             }

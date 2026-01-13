@@ -12,7 +12,6 @@ namespace SPICA.Formats.CtrH3D.Model
 {
     public class H3DModel : INamed, ICustomSerialization
     {
-        [Ignore]
         public bool IsVisible { get; set; } = true;
 
         public H3DModelFlags  Flags;

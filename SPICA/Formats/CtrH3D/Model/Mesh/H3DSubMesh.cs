@@ -65,6 +65,11 @@ namespace SPICA.Formats.CtrH3D.Model.Mesh
             }
         }
 
+        /// <summary>
+        /// Editor only
+        /// </summary>
+        public H3DBillboardMode BillboardMode = H3DBillboardMode.Off;
+
         [Ignore] public ushort BoolUniforms;
 
         [Ignore] public ushort[] Indices;

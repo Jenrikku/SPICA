@@ -270,8 +270,21 @@ namespace SPICA.Formats.CtrGfx.Model
                         Translation = Bone.Translation,
                         Rotation = Bone.Rotation,
                         Scale = Bone.Scale,
-                        InverseTransform = Bone.InvWorldTransform
+                        InverseTransform = Bone.InvWorldTransform,
+                        BillboardMode = (H3DBillboardMode)Bone.BillboardMode,
                     };
+
+                    // pass billboard info to submeshes
+                    if (B.BillboardMode != H3DBillboardMode.Off)
+                        foreach (H3DMesh M in Mdl.Meshes)
+                        {
+                            H3DSubMesh SM = M.SubMeshes[0];
+                            if (Bone == ((GfxModelSkeletal)Model).Skeleton.Bones[SM.BoneIndices[0]])
+                            {
+                                SM.BillboardMode = B.BillboardMode;
+                                if (SM.BillboardMode != H3DBillboardMode.Off) Console.WriteLine($"Mesh in model {Mdl.Name} has billboarding set to {SM.BillboardMode}");
+                            }
+                        }
 
                     bool ScaleCompensate = (Bone.Flags & GfxBoneFlags.IsSegmentScaleCompensate) != 0;
 

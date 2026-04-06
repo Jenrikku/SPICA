@@ -244,6 +244,7 @@ namespace SPICA.Formats.CtrGfx.Model
 
                 M.UpdateBoolUniforms(Mdl.Materials[Mesh.MaterialIndex]);
                 M.IsVisible = Mesh.IsVisible;
+                M.Name = Mesh.MeshNodeName;
 
                 Mdl.AddMesh(M);
             }

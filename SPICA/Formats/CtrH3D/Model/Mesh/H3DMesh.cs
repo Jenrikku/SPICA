@@ -23,6 +23,7 @@ namespace SPICA.Formats.CtrH3D.Model.Mesh
         [Ignore]
         public bool IsSelected { get; set; }
 
+        public string Name { get; set; }
         public ushort MaterialIndex;
 
         [Padding(2)] private byte Flags;
